@@ -76,7 +76,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const isSeatInCart = useCallback(
     (sessionId: string, seatId: string) =>
       lines.some(
-        (l) => l.sessionId === sessionId && l.seats.some((s) => s.id === seatId)
+        (l) =>
+          l.sessionId === sessionId &&
+          Array.isArray(l.seats) &&
+          l.seats.some((s) => s.id === seatId)
       ),
     [lines]
   );
@@ -87,7 +90,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 
   const seatCount = useMemo(
-    () => lines.reduce((a, l) => a + l.seats.length, 0),
+    () => lines.reduce((a, l) => a + (l.seats?.length ?? 0), 0),
     [lines]
   );
 

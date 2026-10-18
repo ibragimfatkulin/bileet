@@ -1,7 +1,5 @@
 import type { Movie, Session } from "@/types";
 
-const TMDB = "https://image.tmdb.org/t/p/w500";
-
 const CINEMAS = ["Magic Cinema", "Cinematica Tashkent", "Planet 9", "Westminster"];
 
 function sessionsFor(movieId: string, titleSlug: string): Session[] {
@@ -31,6 +29,7 @@ function sessionsFor(movieId: string, titleSlug: string): Session[] {
   return list;
 }
 
+/** Актуальная афиша: хиты проката 2024–2025 (постеры — local JPG). */
 export const MOVIES: Movie[] = [
   {
     id: "m1",
@@ -39,8 +38,9 @@ export const MOVIES: Movie[] = [
     ageRating: "12+",
     genre: "фантастика",
     description:
-      "Пол Атрейдес объединяется с фременами и стремится предотвратить ужасное будущее, которое видит в видениях.",
-    posterPath: `${TMDB}/1pdfLvkbY9ohJlCjQH2CZjjYQEf.jpg`,
+      "Пол Атрейдес объединяется с фременами Аракиса, чтобы противостоять империи Харконненов и судьбе, которую ему навязывают пророчества. Чем ближе победа, тем сильнее разрыв между любовью к Чани и страхом перед будущим, которое он видит в видениях. Эпическое продолжение по роману Фрэнка Герберта от Дени Вильнёва — песок, политика и миф, от которого нельзя отмахнуться.",
+    posterPath: "/posters/m1.jpg",
+    trailerYoutubeId: "Way9Dexny3w",
     sessions: sessionsFor("m1", "dune2"),
   },
   {
@@ -49,8 +49,10 @@ export const MOVIES: Movie[] = [
     durationMin: 180,
     ageRating: "16+",
     genre: "драма",
-    description: "История создателя атомной бомбы и моральной цены научного прорыва.",
-    posterPath: `${TMDB}/8Gxv8gSfcU0XGDykEGv7zR1n2ua.jpg`,
+    description:
+      "История Роберта Оппенгеймера — физика, возглавившего Манхэттенский проект и создавшего оружие, изменившее войну и мир. Фильм переплетает научный азарт, политические слушания 1950-х и моральный груз человека, которого называют «отцом атомной бомбы». Биографическая драма Кристофера Нолана о власти, вине и цене прогресса.",
+    posterPath: "/posters/m2.jpg",
+    trailerYoutubeId: "bK6ldnjE3Y0",
     sessions: sessionsFor("m2", "oppen"),
   },
   {
@@ -59,8 +61,10 @@ export const MOVIES: Movie[] = [
     durationMin: 114,
     ageRating: "12+",
     genre: "комедия",
-    description: "Барби отправляется в реальный мир и открывает для себя новые грани идентичности.",
-    posterPath: `${TMDB}/iuFNMD6IUcvHHEE7LcUOeuKX1Ja.jpg`,
+    description:
+      "Идеальная Барби внезапно сталкивается с экзистенциальным кризисом и отправляется из розового Barbieland в настоящий мир вместе с верным Кеном. Там она узнаёт, что быть «идеальной» — не то же самое, что быть собой, а мечты о счастье сложнее, чем в рекламном слогане. Яркая комедия Греты Гервиг о женственности, капитализме и дружбе с самоиронией.",
+    posterPath: "/posters/m3.jpg",
+    trailerYoutubeId: "pBk4NYhWNMM",
     sessions: sessionsFor("m3", "barbie"),
   },
   {
@@ -69,8 +73,10 @@ export const MOVIES: Movie[] = [
     durationMin: 206,
     ageRating: "16+",
     genre: "криминал",
-    description: "Расследование серии убийств в племени осейджи в 1920-х годах.",
-    posterPath: `${TMDB}/dB6KrDsbotSMK2rqTS8f1JTxe5y.jpg`,
+    description:
+      "В 1920-х на землях племени осейджи, разбогатевшего на нефти, начинается цепь загадочных убийств. В центре — Молли и её муж Эрнест, втянутые в сеть жадности, расизма и предательства, пока ФБР пытается докопаться до правды. Мартин Скорсезе по книге Дэвида Гранна — тяжёлая хроника «царства террора», где деньги и власть стоят дороже жизни.",
+    posterPath: "/posters/m4.jpg",
+    trailerYoutubeId: "EP34Yoxs3FQ",
     sessions: sessionsFor("m4", "killers"),
   },
   {
@@ -79,8 +85,10 @@ export const MOVIES: Movie[] = [
     durationMin: 141,
     ageRating: "18+",
     genre: "фэнтези",
-    description: "Молодая женщина, воскрешённая учёным, отправляется в путешествие по миру.",
-    posterPath: `${TMDB}/kCGjSTFUSIka8iuOaKhv6rTcfnx.jpg`,
+    description:
+      "Белла Бакстер — женщина, которую блестящий и эксцентричный учёный воскресил и обучает жизни заново, словно ребёнка. Она рвётся за пределы лаборатории, влюбляется, путешествует и отвергает правила «приличного» общества викторианской эпохи. Сюрреалистическая фантазия Йоргоса Лантимоса о свободе, теле и праве быть несовершенной.",
+    posterPath: "/posters/m5.jpg",
+    trailerYoutubeId: "RlbR5N6veqw",
     sessions: sessionsFor("m5", "poor"),
   },
   {
@@ -89,8 +97,10 @@ export const MOVIES: Movie[] = [
     durationMin: 141,
     ageRating: "18+",
     genre: "ужасы",
-    description: "Стареющая звезда соглашается на сомнительную процедуру омоложения.",
-    posterPath: `${TMDB}/lqoMzCcZYEFK729dHZwNKAOhOry.jpg`,
+    description:
+      "Элизабет, звезда утреннего фитнес-шоу, уволена из-за возраста и находит «Субстанцию» — укол, создающий молодую, «идеальную» версию себя по имени Сью. Правило простое: неделя за одной, неделя за другой, но контроль быстро ускользает. Жёсткий боди-хоррор о одержимости молодостью, славой и ненависти к собственному отражению.",
+    posterPath: "/posters/m6.jpg",
+    trailerYoutubeId: "LNlrGhBpYjc",
     sessions: sessionsFor("m6", "substance"),
   },
   {
@@ -99,8 +109,10 @@ export const MOVIES: Movie[] = [
     durationMin: 96,
     ageRating: "6+",
     genre: "анимация",
-    description: "Райли становится подростком — в голове появляются новые эмоции.",
-    posterPath: `${TMDB}/vpnVM9l0q8fzE0eOs1PrxyycuXl.jpg`,
+    description:
+      "Райли переходит в старшую школу, и в её голове появляются новые эмоции — Тревога, Зависть, Стыд и другие, которые перестраивают привычную команду Радости и грусти. Подростковые дружбы, хоккей и самооценка превращаются в поле битвы между старыми привычками и взрослением. Сиквел Pixar — тёплый и смешной разговор о том, что чувствовать всё сразу нормально.",
+    posterPath: "/posters/m7.jpg",
+    trailerYoutubeId: "LEjhY15eCx0",
     sessions: sessionsFor("m7", "inside2"),
   },
   {
@@ -109,8 +121,10 @@ export const MOVIES: Movie[] = [
     durationMin: 128,
     ageRating: "18+",
     genre: "боевик",
-    description: "Дэдпул и Росомаха объединяются в безумном приключении по мультивселенной.",
-    posterPath: `${TMDB}/8cdWjvZQUExUIFz2jgxX1xlQfmI.jpg`,
+    description:
+      "Уэйд Уилсон вырывает из другой реальности уставшего Логана, чтобы спасти свою временную линию от краха. Вместе им предстоит пройти через сатиру, насилие и ностальгию по эпохе Людей Икс, пока бюрократ вселенной Marvel не вмешается окончательно. Третий «Дэдпул» — громкий кроссовер с Росомахой, где четвёртая стена ломается чаще, чем кости злодеев.",
+    posterPath: "/posters/m8.jpg",
+    trailerYoutubeId: "73_1biulkYk",
     sessions: sessionsFor("m8", "deadpool"),
   },
   {
@@ -119,18 +133,22 @@ export const MOVIES: Movie[] = [
     durationMin: 148,
     ageRating: "16+",
     genre: "история",
-    description: "Наследник Максимуса возвращается на арену Колизея.",
-    posterPath: `${TMDB}/2cxhvwyEwRlysAmRH4iodkNCyDCq.jpg`,
+    description:
+      "Луций, племянник императора Коммода, давно потерял связь с прошлым Рима и вынужден снова вступить на арену, когда тирания захлёстывает империю. На его пути — гладиаторские бои, политические интриги и тень легендарного Максимуса. Ридли Скотт возвращает зрителя в Колизей: месть, честь и вопрос, кому на самом деле принадлежит «мечта о Риме».",
+    posterPath: "/posters/m9.jpg",
+    trailerYoutubeId: "4rgYUipGJNo",
     sessions: sessionsFor("m9", "glad2"),
   },
   {
     id: "m10",
-    title: "Злая: Сказка о ведьме Запада",
+    title: "Злая",
     durationMin: 160,
     ageRating: "12+",
     genre: "мюзикл",
-    description: "История ведьмы Запада до прибытия Дороти в Страну Оз.",
-    posterPath: `${TMDB}/c5Tqxeo1UpBvnAc3csUmUAinOFy.jpg`,
+    description:
+      "До прибытия Дороти в Оз две студентки Шизского университета — зеленокожая Эльфаба и светская Глинда — становятся соседками и неожиданными подругами. Одна обладает запретной магией, другая мечтает о популярности, а Волшебник играет на их судьбах ради собственной власти. Экранизация мюзикла о том, как из «злой ведьмы» рождается миф, который мир готов ненавидеть.",
+    posterPath: "/posters/m10.jpg",
+    trailerYoutubeId: "6COmYeLsz4c",
     sessions: sessionsFor("m10", "wicked"),
   },
   {
@@ -139,8 +157,10 @@ export const MOVIES: Movie[] = [
     durationMin: 120,
     ageRating: "16+",
     genre: "триллер",
-    description: "Кардиналы собираются в Ватикане, чтобы избрать нового папу.",
-    posterPath: `${TMDB}/m5x8D0bZ3eKqIVWZIvt63qCsVDV.jpg`,
+    description:
+      "После внезапной смерти Папы кардинал Лоуренс должен провести конclave — тайное голосование, от которого зависит будущее католической церкви. За запертыми дверями Ватикана амбиции, тайны и идеологические расколы всплывают один за другим. Напряжённый политический триллер о вере, компромиссе и цене «абсолютной» уверенности.",
+    posterPath: "/posters/m11.jpg",
+    trailerYoutubeId: "JX9jasdi3ic",
     sessions: sessionsFor("m11", "conclave"),
   },
   {
@@ -149,8 +169,10 @@ export const MOVIES: Movie[] = [
     durationMin: 139,
     ageRating: "18+",
     genre: "драма",
-    description: "Секс-работница из Бруклина выходит замуж за сына олигарха.",
-    posterPath: `${TMDB}/7QnFHf4lKKd7QjJsO0bFj3Ie5yH.jpg`,
+    description:
+      "Ани, молодая работница из Бруклина, за одну ночь выходит замуж за Ваню — сына богатой русской семьи, живущей между Нью-Йорком и Москвой. Романтическая сказка быстро ломается, когда родители жениха посылают людей аннулировать брак любой ценой. Драма Шона Бейкера — хаотичная, смешная и нежная история о классе, любви и упрямстве тех, кого общество привыкло не замечать.",
+    posterPath: "/posters/m12.jpg",
+    trailerYoutubeId: "p1HxTmV5i7c",
     sessions: sessionsFor("m12", "anora"),
   },
 ];

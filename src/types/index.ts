@@ -27,6 +27,8 @@ export interface Movie {
   genre: string;
   description: string;
   posterPath: string;
+  /** YouTube ID официального трейлера — превью на карточке и запасной кадр. */
+  trailerYoutubeId?: string;
   sessions: Session[];
 }
 

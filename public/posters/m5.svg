@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a1942"/>
+      <stop offset="100%" stop-color="#c77dff"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="750" fill="url(#g)"/>
+  <rect x="24" y="24" width="452" height="702" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+  <text x="250" y="360" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="32" font-weight="bold" fill="#fff"><tspan x="250" dy="0">Бедные-несчастные</tspan></text>
+  <text x="250" y="680" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="rgba(255,255,255,0.7)">bileet</text>
+</svg>
