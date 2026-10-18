@@ -1,118 +1,46 @@
-import { buildHallSeats } from "@/data/mock/halls";
-import { getSessionById } from "@/data/mock/movies";
-import type { BookingResult, CartSeat, Seat } from "@/types";
+import { isTursoConfigured } from "@/lib/db";
+import {
+  createBatchBookingMemory,
+  createBookingMemory,
+  getSeatsForSessionMemory,
+} from "@/lib/store-memory";
+import {
+  createBatchBookingTurso,
+  createBookingTurso,
+  getSeatsForSessionTurso,
+} from "@/lib/store-turso";
+import type { BookingResult, Seat } from "@/types";
 
-const occupiedKeys = new Set<string>();
-const bookings: BookingResult[] = [];
-let orderCounter = 1000;
-
-function seatKey(sessionId: string, seatId: string) {
-  return `${sessionId}:${seatId}`;
+export function getBookingStorageMode(): "turso" | "memory" {
+  return isTursoConfigured() ? "turso" : "memory";
 }
 
-export function getSeatsForSession(sessionId: string): Seat[] {
-  return buildHallSeats(sessionId, occupiedKeys);
-}
-
-export function isSeatAvailable(sessionId: string, seatId: string): boolean {
-  const seats = getSeatsForSession(sessionId);
-  const seat = seats.find((s) => s.id === seatId);
-  return Boolean(seat && !seat.occupied);
-}
-
-function seatsToCart(seats: Seat[], seatIds: string[]): CartSeat[] {
-  return seatIds.map((id) => {
-    const s = seats.find((x) => x.id === id);
-    if (!s) throw new Error(`Seat ${id} not found`);
-    return { id: s.id, row: s.row, number: s.number, zone: s.zone, price: s.price };
-  });
-}
-
-function reserveSeats(sessionId: string, seatIds: string[]) {
-  for (const id of seatIds) {
-    if (!isSeatAvailable(sessionId, id)) {
-      throw new Error(`Seat ${id} is not available`);
-    }
+export async function getSeatsForSession(sessionId: string): Promise<Seat[]> {
+  if (getBookingStorageMode() === "turso") {
+    return getSeatsForSessionTurso(sessionId);
   }
-  seatIds.forEach((id) => occupiedKeys.add(seatKey(sessionId, id)));
+  return getSeatsForSessionMemory(sessionId);
 }
 
-export function createBooking(
+export async function createBooking(
   name: string,
   email: string,
   sessionId: string,
   seatIds: string[]
-): BookingResult {
-  const ctx = getSessionById(sessionId);
-  if (!ctx) throw new Error("Session not found");
-  const seats = getSeatsForSession(sessionId);
-  reserveSeats(sessionId, seatIds);
-  const cartSeats = seatsToCart(seats, seatIds);
-  const subtotal = cartSeats.reduce((a, s) => a + s.price, 0);
-  orderCounter += 1;
-  const result: BookingResult = {
-    orderId: `BL-${orderCounter}`,
-    name,
-    email,
-    total: subtotal,
-    lines: [
-      {
-        sessionId,
-        movieTitle: ctx.movie.title,
-        cinemaName: ctx.cinemaName,
-        date: ctx.date,
-        time: ctx.time,
-        seats: cartSeats,
-        subtotal,
-      },
-    ],
-    createdAt: new Date().toISOString(),
-  };
-  bookings.push(result);
-  return result;
+): Promise<BookingResult> {
+  if (getBookingStorageMode() === "turso") {
+    return createBookingTurso(name, email, sessionId, seatIds);
+  }
+  return createBookingMemory(name, email, sessionId, seatIds);
 }
 
-export function createBatchBooking(
+export async function createBatchBooking(
   name: string,
   email: string,
   items: { sessionId: string; seatIds: string[] }[]
-): BookingResult {
-  if (!items.length) throw new Error("Cart is empty");
-  const lines: BookingResult["lines"] = [];
-  let total = 0;
-
-  for (const item of items) {
-    const ctx = getSessionById(item.sessionId);
-    if (!ctx) throw new Error(`Session ${item.sessionId} not found`);
-    const seats = getSeatsForSession(item.sessionId);
-    reserveSeats(item.sessionId, item.seatIds);
-    const cartSeats = seatsToCart(seats, item.seatIds);
-    const subtotal = cartSeats.reduce((a, s) => a + s.price, 0);
-    total += subtotal;
-    lines.push({
-      sessionId: item.sessionId,
-      movieTitle: ctx.movie.title,
-      cinemaName: ctx.cinemaName,
-      date: ctx.date,
-      time: ctx.time,
-      seats: cartSeats,
-      subtotal,
-    });
+): Promise<BookingResult> {
+  if (getBookingStorageMode() === "turso") {
+    return createBatchBookingTurso(name, email, items);
   }
-
-  orderCounter += 1;
-  const result: BookingResult = {
-    orderId: `BL-${orderCounter}`,
-    name,
-    email,
-    total,
-    lines,
-    createdAt: new Date().toISOString(),
-  };
-  bookings.push(result);
-  return result;
-}
-
-export function listBookings(): BookingResult[] {
-  return [...bookings];
+  return createBatchBookingMemory(name, email, items);
 }

@@ -5,6 +5,8 @@ import { formatSessionDate } from "@/lib/format";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function SessionPage({
   params,
 }: {
@@ -13,7 +15,7 @@ export default async function SessionPage({
   const { id } = await params;
   const ctx = getSessionById(id);
   if (!ctx) notFound();
-  const seats = getSeatsForSession(id);
+  const seats = await getSeatsForSession(id);
 
   return (
     <div>

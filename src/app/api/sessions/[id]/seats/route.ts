@@ -21,6 +21,6 @@ export async function GET(
       time: session.time,
       hallLabel: session.hallLabel,
     },
-    seats: getSeatsForSession(id),
+    seats: await getSeatsForSession(id),
   });
 }

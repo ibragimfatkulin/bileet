@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     if (!body.name?.trim() || !body.email?.trim() || !body.items?.length) {
       return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
     }
-    const result = createBatchBooking(body.name.trim(), body.email.trim(), body.items);
+    const result = await createBatchBooking(body.name.trim(), body.email.trim(), body.items);
     return NextResponse.json(result);
   } catch (e) {
     const message = e instanceof Error ? e.message : "Batch booking failed";

@@ -8,7 +8,12 @@ export async function POST(req: Request) {
     if (!body.name?.trim() || !body.email?.trim() || !body.sessionId || !body.seatIds?.length) {
       return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
     }
-    const result = createBooking(body.name.trim(), body.email.trim(), body.sessionId, body.seatIds);
+    const result = await createBooking(
+      body.name.trim(),
+      body.email.trim(),
+      body.sessionId,
+      body.seatIds
+    );
     return NextResponse.json(result);
   } catch (e) {
     const message = e instanceof Error ? e.message : "Booking failed";

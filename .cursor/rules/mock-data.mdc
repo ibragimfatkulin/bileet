@@ -8,5 +8,5 @@ alwaysApply: true
 - Фильмы, сеансы, кинотеатры и схема зала берутся из `src/data/mock/`.
 - Постеры — локальные `public/posters/*.jpg` (`npm run posters`, Wikipedia); запасной кадр — превью трейлера YouTube.
 - Не подключать внешние БД и live TMDB API без явной просьбы пользователя.
-- API Route Handlers читают моки и дополняют их in-memory состоянием (`src/lib/store.ts`) для занятых мест и броней.
-- Для демо-оплаты достаточно in-memory store; после перезапуска dev-сервера брони сбрасываются.
+- API Route Handlers читают моки; занятые места и брони — в Turso (`src/lib/store.ts`, `TURSO_*` в `.env`). Без переменных окружения — fallback in-memory только для локальной разработки.
+- Схема БД: `npm run db:migrate` (таблицы `session_occupancy`, `bookings`, `order_counter`).
